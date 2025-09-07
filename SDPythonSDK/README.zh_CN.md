@@ -21,7 +21,8 @@
 │   │   ├── logger.py        # 日志管理
 │   │   └── action_factory.py # 动作工厂类
 │   └── actions/       # 具体动作实现
-├── requirements.txt   # 项目依赖
+├── pyproject.toml     # 项目配置和依赖管理
+├── uv.lock           # 锁定的依赖版本
 ├── main.py           # 主程序入口
 ├── main.spec         # PyInstaller配置文件
 └── README.md         # 项目说明
@@ -29,24 +30,41 @@
 
 ## 开发环境设置
 
-1. 创建虚拟环境：
+### 安装 uv
+
+如果你还没有安装 uv，可以通过以下命令安装：
+
 ```bash
-python -m venv venv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-2. 激活虚拟环境：
-- Windows:
+### 项目设置
+
+1. 安装依赖：
 ```bash
-venv\Scripts\activate
-```
-- Unix/MacOS:
-```bash
-source venv/bin/activate
+uv sync
 ```
 
-3. 安装依赖：
+2. 运行项目：
 ```bash
-pip install -r requirements.txt
+uv run python main.py -port 12345 -pluginUUID "your-uuid" -registerEvent "registerPlugin" -info "{}"
+```
+
+### 依赖管理
+
+- 添加新依赖：
+```bash
+uv add package-name
+```
+
+- 添加开发依赖：
+```bash
+uv add --dev package-name
+```
+
+- 更新依赖：
+```bash
+uv lock --upgrade
 ```
 
 ## 插件开发指南

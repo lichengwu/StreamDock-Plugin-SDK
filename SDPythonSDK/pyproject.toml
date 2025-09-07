@@ -1,0 +1,22 @@
+[project]
+name = "sdpythonsdk"
+version = "0.1.0"
+description = "StreamDock Plugin SDK for Python"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cryptography==44.0.2",
+    "Pillow==11.1.0",
+    "requests==2.32.3",
+    "websocket-client==1.8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.uv]
+dev-dependencies = []

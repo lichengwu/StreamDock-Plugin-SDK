@@ -21,7 +21,8 @@ This is a Python SDK for developing Stream Dock plugins, providing simple and ea
 │   │   ├── logger.py        # Log management
 │   │   └── action_factory.py # Action factory class
 │   └── actions/       # Specific action implementations
-├── requirements.txt   # Project dependencies
+├── pyproject.toml     # Project configuration and dependency management
+├── uv.lock           # Locked dependency versions
 ├── main.py           # Main program entry
 ├── main.spec         # PyInstaller configuration file
 └── README.md         # Project documentation
@@ -29,24 +30,41 @@ This is a Python SDK for developing Stream Dock plugins, providing simple and ea
 
 ## Development Environment Setup
 
-1. Create virtual environment:
+### Install uv
+
+If you haven't installed uv yet, you can install it with the following command:
+
 ```bash
-python -m venv venv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-2. Activate virtual environment:
-- Windows:
+### Project Setup
+
+1. Install dependencies:
 ```bash
-venv\Scripts\activate
-```
-- Unix/MacOS:
-```bash
-source venv/bin/activate
+uv sync
 ```
 
-3. Install dependencies:
+2. Run the project:
 ```bash
-pip install -r requirements.txt
+uv run python main.py -port 12345 -pluginUUID "your-uuid" -registerEvent "registerPlugin" -info "{}"
+```
+
+### Dependency Management
+
+- Add new dependencies:
+```bash
+uv add package-name
+```
+
+- Add development dependencies:
+```bash
+uv add --dev package-name
+```
+
+- Update dependencies:
+```bash
+uv lock --upgrade
 ```
 
 ## Plugin Development Guide
